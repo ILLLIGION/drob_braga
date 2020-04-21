@@ -95,14 +95,14 @@ public:
 
 auto operator<< (std::ostream &out, const drob& a) -> std::ostream&
 {
-    if (a.znamen == 1) std::cout << a.chisl << std::endl;
+    if (a.znamen == 1) out << a.chisl << std::endl;
     else out << a.chisl << "/" << a.znamen << std::endl;
     return out;
 }
 
     int main()
     {
-        drob a(2,4);
+        drob a(2,1);
         std::cout << a/0;
         std::cout << a;
     return 0;
