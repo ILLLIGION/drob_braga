@@ -38,10 +38,11 @@ public:
     ~drob() {};                                                 //деструктор, нужен для очистки памяти после удаления
                                                                             // объекта
 
-    auto obratn () -> drob
+    auto obratn () -> void            
     {
-        //drob rezult (znamen, chisl);
-        return drob(znamen,chisl);           //!!!!!!!!!!!!!!!!!!!!!!!!!!
+        int temp = chisl;
+        chisl = znamen;
+        znamen = temp;
     }
 
     auto otrizanie() -> void
@@ -94,6 +95,26 @@ public:
     {
         //drob rezult (chisl*vtoraya_drob.znamen+vtoraya_drob.chisl*znamen, znamen*vtoraya_drob.znamen);
         return drob(chisl*vtoraya_drob.znamen+vtoraya_drob.chisl*znamen, znamen*vtoraya_drob.znamen); //!!!!!!!!!!!!!!
+    }
+
+    auto voz_step (int step) -> void
+    {
+        if (step < 0)
+        {
+            this->obratn();
+            step*=-1;
+        }
+        if (step == 0)
+        {
+            chisl = 1;
+            znamen = 1;
+            return;
+        }
+        for (int i=1; i<step; i++)
+        {
+            chisl*=chisl;
+            znamen*=znamen;
+        }
     }
 
     friend auto operator<< (std::ostream &out, const drob& a) -> std::ostream&; //объявляем перегрузку оператора вывода
@@ -149,6 +170,8 @@ int main(int argc, char* argv[])
     d.vivod_smesh();
     c.vivod_desyat();
     drob e(-5,-7);
+    std::cout << e;
+    e.voz_step(-2);
     std::cout << e;
     return 0;
 }
