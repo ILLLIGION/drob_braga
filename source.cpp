@@ -32,13 +32,13 @@ public:
 
     drob (int chisl_, int znamen_): chisl(chisl_), znamen(znamen_) //пользовательский конструктор, нужен для
     {                                                                       //создания дробей
-        this->sokrashenie();                                   // this (англ. "это"), используется для того, чтобы
-    };                                                                      //находясь внутри объекта использовать
-                                                                            //метод класса на самого себя
+        sokrashenie();
+    };
+
     ~drob() {};                                                 //деструктор, нужен для очистки памяти после удаления
                                                                             // объекта
 
-    auto obratn () -> void            
+    auto obratn () -> void
     {
         int temp = chisl;
         chisl = znamen;
@@ -101,7 +101,7 @@ public:
     {
         if (step < 0)
         {
-            this->obratn();
+            obratn();
             step*=-1;
         }
         if (step == 0)
@@ -130,18 +130,18 @@ public:
 
     auto vivod_smesh () -> void
     {
-        if (this->zel_chast() == 0) //если целая часть равна 0, то используем обычный вывод
+        if (zel_chast() == 0) //если целая часть равна 0, то используем обычный вывод
         {
             std::cout << *this;
             return;                //завершаем функцию
         }
-        if (chisl-(this->zel_chast()*znamen) == 0) //если числитель после выделения целой части равен нулю,
+        if (chisl-(zel_chast()*znamen) == 0) //если числитель после выделения целой части равен нулю,
                                                                             // то выводим только целую часть
         {
-            std::cout << this->zel_chast() << std::endl;
+            std::cout << zel_chast() << std::endl;
             return;                //завершаем функцию
         }
-        std::cout << this->zel_chast() << "    " << chisl-(this->zel_chast()*znamen) << '/' << znamen << std::endl;
+        std::cout << zel_chast() << "    " << chisl-(zel_chast()*znamen) << '/' << znamen << std::endl;
     }
 
     auto vivod_desyat () -> void
